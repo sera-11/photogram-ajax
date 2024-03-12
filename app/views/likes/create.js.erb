@@ -1,0 +1,6 @@
+console.log("hello")
+
+<%# find the existing photo_id_likes element %>
+var existingLikes = $("#<%= dom_id(@like.photo) %>_likes")
+
+<%# replace it with a new photo_id_likes element %>
