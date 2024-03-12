@@ -1,1 +1,1 @@
-console.log("howdy");
+$("#<%= dom_id(@comment) %>").replaceWith("<%= j(render "comments/form", comment: @comment) %>");
