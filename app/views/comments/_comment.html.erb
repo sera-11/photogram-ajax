@@ -1,24 +1,42 @@
-<li class="list-group-item">
+<li id="<%= dom_id(comment) %>" class="list-group-item">
   <div class="d-flex">
     <div class="flex-shrink-0">
       <%= image_tag comment.author.avatar_image, class: "rounded-circle mr-2", width: 36 %>
     </div>
     <div class="flex-grow-1 ms-3">
       <h5 class="mt-0">
+
         <%= link_to comment.author.username, user_path(comment.author.username), class: "text-dark link-dark link-underline-opacity-0 link-underline-opacity-100-hover" %>
       </h5>
       <p><%= comment.body %></p>
     </div>
     <div>
-      <% if current_user == comment.author %>
-        <%= link_to edit_comment_path(comment), class: "btn btn-link btn-sm text-muted" do %>
-          <i class="fas fa-edit fa-fw"></i>
-        <% end %>
+      <%# if current_user == comment.author %>
+      <%#= link_to edit_comment_path(comment), class: "btn btn-link btn-sm text-muted" do %>
+        <!--          <i class="fas fa-edit fa-fw"></i>-->
+        <%# end %>
+        <!---->
+        <%= link_to edit_comment_path(comment),
+          class: "btn btn-link btn-sm text-muted",
+          remote: true do %>
 
-        <%= link_to comment, data: { turbo_method: :delete }, class: "btn btn-link btn-sm text-muted" do %>
+          <i class="fas fa-edit fa-fw"></i>
+
+        <%end%>
+
+        <%#= link_to "#", # comment,                      # removed the href since we're breaking the link anyway
+      # data: { turbo_method: :delete },         # removed the method since we're breaking the link anyway
+      class: "btn btn-link btn-sm text-muted",
+      id: "#comment_{comment.id}_delete_link" do # added an id to the link so that I can bind a click handler to it %>
+        <!---->
+
+        <!-- Instead of that^^^ do this vvv -->
+        <%= link_to comment,
+          method: :delete,
+          class: "btn btn-link btn-sm text-muted",
+          remote: true do %>
           <i class="fas fa-trash fa-fw"></i>
         <% end %>
-      <% end %>
     </div>
   </div>
 </li>
