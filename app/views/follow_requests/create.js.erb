@@ -1,0 +1,7 @@
+<%# grab the unfollow %>
+var unfollow = $("#<%= dom_id(@follow_request) %>")
+
+<%# get the form %>
+var unrequest = $("<%= j(render "follow_requests/follow_unfollow", sender: @follow_request.sender, recipient: @follow_request.recipient) %>");
+
+$(".form").replaceWith(unrequest);
